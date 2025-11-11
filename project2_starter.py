@@ -164,9 +164,9 @@ class Warrior(Player):
         # Maybe strength + 5 bonus damage?
         damage = self.strength + 5
         if self.weapon:
-            damage+= self.weapon.damage_bonus
+            damage += self.weapon.damage_bonus
         target.take_damage(damage)
-        print(f"{self.name} uses POWER STRIKE on {target.name} for {damage} damage!")
+        print(f"{self.name} smashes {target.name} for {damage} damage!")
         pass
         
     def power_strike(self, target):
@@ -175,6 +175,9 @@ class Warrior(Player):
         """
         # TODO: Implement power strike
         # Should do significantly more damage than regular attack
+        damage = self.strength * 2
+        target.take_damage(damage)
+        print(f"{self.name} uses POWER STRIKE on {target.name} for {damage} damage!")
         pass
 
 class Mage(Player):
@@ -190,6 +193,7 @@ class Mage(Player):
         """
         # TODO: Call super().__init__() with mage-appropriate stats
         # Suggested stats: health=80, strength=8, magic=20
+        super().__init__(name, "Mage", 80, 8, 20)
         pass
         
     def attack(self, target):
@@ -199,6 +203,11 @@ class Mage(Player):
         """
         # TODO: Implement mage attack
         # Should use self.magic for damage calculation instead of strength
+        damage = self.magic
+        if self.weapon:
+            damage += self.weapon.damage_bonus
+        target.take_damage(damage)
+        print(f"{self.name} casts a magic blast on {target.name} for {damage} damage!")
         pass
         
     def fireball(self, target):
@@ -207,6 +216,9 @@ class Mage(Player):
         """
         # TODO: Implement fireball spell
         # Should do magic-based damage with bonus
+        damage = self.magic * 2
+        target.take_damage(damage)
+        print(f"{self.name} casts FIREBALL on {target.name} for {damage} damage!")
         pass
 
 class Rogue(Player):
@@ -222,6 +234,7 @@ class Rogue(Player):
         """
         # TODO: Call super().__init__() with rogue-appropriate stats
         # Suggested stats: health=90, strength=12, magic=10
+        super().__init__(name, "Rogue",90, 12, 10)
         pass
         
     def attack(self, target):
@@ -240,6 +253,12 @@ class Rogue(Player):
         """
         # TODO: Implement sneak attack
         # Should always do critical damage
+        crit = random.randint(1,10) <= 3
+        damage = self.strength * (2 if crit else 1)
+        if self.weapon:
+            damage += self.weapon.damage_bonus
+        target.take_damage(damage)
+        print(f"{self.name} attacks {target.name} for {damage} damage! {'(CRTICAL HIT!)' if crit else ''}")
         pass
 
 class Weapon:

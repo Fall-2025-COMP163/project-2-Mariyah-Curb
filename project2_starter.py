@@ -95,7 +95,7 @@ class Character:
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
         self.health = max(0, self.health - damage)
-        print(f"{self.name} takes {damage} damage. Health now: {self.heath}")
+        print(f"{self.name} takes {damage} damage. Health now: {self.health}")
         pass
         
     def display_stats(self):
@@ -127,7 +127,12 @@ class Player(Character):
         self.experience = 0
         self.weapon = None
         pass
-        
+
+    def equip_weapon(self, weapon):
+        self.weapon = weapon
+        print(f"{self.name} equipped {weapon.name}!")
+
+
     def display_stats(self):
         """
         Override the parent's display_stats to show additional player info.

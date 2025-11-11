@@ -10,6 +10,7 @@ Example: AI helped with inheritance structure and method overriding concepts
 # ============================================================================
 # PROVIDED BATTLE SYSTEM (DO NOT MODIFY)
 # ============================================================================
+import random
 
 class SimpleBattle:
     """
@@ -81,7 +82,7 @@ class Character:
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
         damage = self.strength
-        target.take.damage(damage)
+        target.take_damage(damage)
         print(f"{self.name} attacks {target.name} for {damage} damage")
         pass
         
@@ -94,7 +95,7 @@ class Character:
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
         self.health = max(0, self.health - damage)
-        print(f"{self.name} taks {damage} damage. Health now: {self.heath}")
+        print(f"{self.name} takes {damage} damage. Health now: {self.heath}")
         pass
         
     def display_stats(self):
@@ -245,6 +246,12 @@ class Rogue(Player):
         # TODO: Implement rogue attack
         # Could add a chance for critical hit (double damage)
         # Hint: use random.randint(1, 10) and if result <= 3, it's a crit
+        crit = random.randint(1,10) <= 3
+        damage = self.strength * (2 if crit else 1)
+        if self.weapon:
+            damage += self.weapon.damage_bonus
+        target.take_damage(damage)
+        print(f"{self.name} attacks {target.name} for {damage} damage! {'(CRTICAL HIT!)' if crit else ''}")
         pass
         
     def sneak_attack(self, target):
@@ -253,13 +260,9 @@ class Rogue(Player):
         """
         # TODO: Implement sneak attack
         # Should always do critical damage
-        crit = random.randint(1,10) <= 3
-        damage = self.strength * (2 if crit else 1)
-        if self.weapon:
-            damage += self.weapon.damage_bonus
+        damage = (self.strength + self.magic) * 2
         target.take_damage(damage)
-        print(f"{self.name} attacks {target.name} for {damage} damage! {'(CRTICAL HIT!)' if crit else ''}")
-        pass
+        print(f"{self.name} performs SNEAK ATTACK on {target.name} for {damage}!")
 
 class Weapon:
     """
@@ -316,9 +319,9 @@ if __name__ == "__main__":
     # mage.display_stats()
     # rogue.display_stats()
     print("\n Character Stats:")
-    warrior.display_stats
-    mage.display_stats
-    rogue.display_stats
+    warrior.display_stats()
+    mage.display_stats()
+    rogue.display_stats()
     
     # TODO: Test polymorphism - same method call, different behavior
     # print("\n⚔️ Testing Polymorphism (same attack method, different behavior):")

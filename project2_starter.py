@@ -1,7 +1,7 @@
 """
 COMP 163 - Project 2: Character Abilities Showcase
-Name: [Your Name Here]
-Date: [Date]
+Name: Mariyah Curb
+Date: 11/11/2025
 
 AI Usage: [Document any AI assistance used]
 Example: AI helped with inheritance structure and method overriding concepts
@@ -63,6 +63,10 @@ class Character:
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.magic = magic
         pass
         
     def attack(self, target):
@@ -76,6 +80,9 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
+        damage = self.strength
+        target.take.damage(damage)
+        print(f"{self.name} attacks {target.name} for {damage} damage")
         pass
         
     def take_damage(self, damage):
@@ -86,6 +93,8 @@ class Character:
         # TODO: Implement taking damage
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
+        self.health = max(0, self.health - damage)
+        print(f"{self.name} taks {damage} damage. Health now: {self.heath}")
         pass
         
     def display_stats(self):
@@ -94,6 +103,7 @@ class Character:
         """
         # TODO: Print character's name, health, strength, and magic
         # Make it look nice with formatting
+        print(f"Name: {self.name}, Health: {self.health}, Strength: {self.strength}, Magic: {self.magic}")
         pass
 
 class Player(Character):
@@ -110,6 +120,11 @@ class Player(Character):
         # TODO: Call super().__init__() with the basic character info
         # TODO: Store the character_class (like "Warrior", "Mage", etc.)
         # TODO: Add any other player-specific attributes (level, experience, etc.)
+        super().__init__(name, health, strength, magic)
+        self.character_class = character_class
+        self.level = 1
+        self.experience = 0
+        self.weapon = None
         pass
         
     def display_stats(self):
@@ -119,6 +134,8 @@ class Player(Character):
         """
         # TODO: Call the parent's display_stats method using super()
         # TODO: Then print additional player info like class and level
+        super().display_stats()
+        print(f"Class: {self.character_class}, Level: {self.level}, XP: {self.experience}")
         pass
 
 class Warrior(Player):
@@ -134,6 +151,7 @@ class Warrior(Player):
         """
         # TODO: Call super().__init__() with warrior-appropriate stats
         # Suggested stats: health=120, strength=15, magic=5
+        super().__init__(name, "Warrior", 120, 15, 5)
         pass
         
     def attack(self, target):
@@ -144,6 +162,11 @@ class Warrior(Player):
         # TODO: Implement warrior attack
         # Should do more damage than basic attack
         # Maybe strength + 5 bonus damage?
+        damage = self.strength + 5
+        if self.weapon:
+            damage+= self.weapon.damage_bonus
+        target.take_damage(damage)
+        print(f"{self.name} uses POWER STRIKE on {target.name} for {damage} damage!")
         pass
         
     def power_strike(self, target):

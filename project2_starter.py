@@ -272,6 +272,8 @@ class Weapon:
         Create a weapon with a name and damage bonus.
         """
         # TODO: Store weapon name and damage bonus
+        self.name = name
+        self.damage_bonus = damage_bonus
         pass
         
     def display_info(self):
@@ -279,6 +281,7 @@ class Weapon:
         Display information about this weapon.
         """
         # TODO: Print weapon name and damage bonus
+        print(f"Weapon: {self.name}, Damage Bonus: {self.damage_bonus}")
         pass
 
 # ============================================================================
@@ -294,28 +297,55 @@ if __name__ == "__main__":
     # warrior = Warrior("Sir Galahad")
     # mage = Mage("Merlin")
     # rogue = Rogue("Robin Hood")
+    warrior = Warrior("Legend")
+    mage = Mage("Jasmodius")
+    rogue = Rogue("Lance")
+
+    Axe = Weapon("Diamond Axe", 15)
+    warrior.equip_weapon(Axe)
+
+    Staff = Weapon("Elemental Staff", 10)
+    mage.equip_weapon(Staff)
+
+    Steal = Weapon("Life Steal", 20)
+    rogue.equip_weapon(Steal)
     
     # TODO: Display their stats
     # print("\n📊 Character Stats:")
     # warrior.display_stats()
     # mage.display_stats()
     # rogue.display_stats()
+    print("\n Character Stats:")
+    warrior.display_stats
+    mage.display_stats
+    rogue.display_stats
     
     # TODO: Test polymorphism - same method call, different behavior
     # print("\n⚔️ Testing Polymorphism (same attack method, different behavior):")
     # dummy_target = Character("Target Dummy", 100, 0, 0)
+    dummy = Character("Training Dummy", 100, 0, 0)
+    
     # 
     # for character in [warrior, mage, rogue]:
     #     print(f"\n{character.name} attacks the dummy:")
     #     character.attack(dummy_target)
     #     dummy_target.health = 100  # Reset dummy health
+
+    print("\n Testing attacks:")
+    warrior.attack(dummy)
+    mage.attack(dummy)
+    rogue.attack(dummy)
     
     # TODO: Test special abilities
     # print("\n✨ Testing Special Abilities:")
     # target1 = Character("Enemy1", 50, 0, 0)
     # target2 = Character("Enemy2", 50, 0, 0)
     # target3 = Character("Enemy3", 50, 0, 0)
-    # 
+
+    print("\n Testing Special Moves")
+    warrior.power_strike(dummy)
+    mage.fireball(dummy)
+    rogue.sneak_attack(dummy)
     # warrior.power_strike(target1)
     # mage.fireball(target2)
     # rogue.sneak_attack(target3)
@@ -325,14 +355,20 @@ if __name__ == "__main__":
     # sword = Weapon("Iron Sword", 10)
     # staff = Weapon("Magic Staff", 15)
     # dagger = Weapon("Steel Dagger", 8)
-    # 
+    # I uh already did this if you scroll up a lil
     # sword.display_info()
     # staff.display_info()
     # dagger.display_info()
+    Axe.display_info()
+    Staff.display_info()
+    Steal.display_info()
     
     # TODO: Test the battle system
     # print("\n⚔️ Testing Battle System:")
     # battle = SimpleBattle(warrior, mage)
     # battle.fight()
+    print("\n Testing Battle System:")
+    battle = SimpleBattle(mage, rogue)
+    battle.fight()
     
     print("\n✅ Testing complete!")

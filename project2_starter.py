@@ -3,8 +3,8 @@ COMP 163 - Project 2: Character Abilities Showcase
 Name: Mariyah Curb
 Date: 11/11/2025
 
-AI Usage: [Document any AI assistance used]
-Example: AI helped with inheritance structure and method overriding concepts
+AI Usage: Gemini
+Example: Used Gemini to assist in the debugging commit of my code
 """
 
 # ============================================================================
